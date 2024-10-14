@@ -77,11 +77,11 @@ void TMR4_Start(void);
 
 void TMR4_Stop(void);
 
-void TMR4_PeriodSet(uint16_t period);
+void TMR4_PeriodSet(uint32_t period);
 
-uint16_t TMR4_PeriodGet(void);
+uint32_t TMR4_PeriodGet(void);
 
-uint16_t TMR4_CounterGet(void);
+uint32_t TMR4_CounterGet(void);
 
 uint32_t TMR4_FrequencyGet(void);
 

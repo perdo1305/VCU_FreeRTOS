@@ -57,15 +57,16 @@
 // *****************************************************************************
 // *****************************************************************************
 
-void TIMER_1_InterruptHandler( void );
 void TIMER_2_InterruptHandler( void );
 void TIMER_3_InterruptHandler( void );
 void TIMER_4_InterruptHandler( void );
 void TIMER_5_InterruptHandler( void );
-void UART1_FAULT_InterruptHandler( void );
-void UART1_RX_InterruptHandler( void );
-void UART1_TX_InterruptHandler( void );
+void DMA0_InterruptHandler( void );
 void TIMER_6_InterruptHandler( void );
+void ADC_DATA0_InterruptHandler( void );
+void ADC_DATA3_InterruptHandler( void );
+void ADC_DATA8_InterruptHandler( void );
+void ADC_DATA15_InterruptHandler( void );
 
 
 

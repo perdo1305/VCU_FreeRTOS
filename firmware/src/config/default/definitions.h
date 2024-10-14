@@ -56,17 +56,24 @@
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/evic/plib_evic.h"
-#include "peripheral/tmr/plib_tmr6.h"
+#include "peripheral/wdt/plib_wdt.h"
+#include "peripheral/dmac/plib_dmac.h"
 #include "peripheral/uart/plib_uart3.h"
 #include "peripheral/coretimer/plib_coretimer.h"
+#include "peripheral/tmr/plib_tmr6.h"
 #include "peripheral/adchs/plib_adchs.h"
-#include "peripheral/uart/plib_uart1.h"
 #include "peripheral/tmr/plib_tmr4.h"
+#include "peripheral/uart/plib_uart1.h"
 #include "peripheral/tmr/plib_tmr5.h"
 #include "peripheral/tmr/plib_tmr2.h"
 #include "peripheral/tmr/plib_tmr3.h"
 #include "peripheral/mcpwm/plib_mcpwm.h"
 #include "peripheral/tmr1/plib_tmr1.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "task1.h"
+
+
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -132,8 +139,46 @@ extern "C" {
 
 void SYS_Initialize( void *data );
 
-/* Nullify SYS_Tasks() if only PLIBs are used. */
-#define     SYS_Tasks()
+// *****************************************************************************
+/* System Tasks Function
+
+Function:
+    void SYS_Tasks ( void );
+
+Summary:
+    Function that performs all polled system tasks.
+
+Description:
+    This function performs all polled system tasks by calling the state machine
+    "tasks" functions for all polled modules in the system, including drivers,
+    services, middleware and applications.
+
+Precondition:
+    The SYS_Initialize function must have been called and completed.
+
+Parameters:
+    None.
+
+Returns:
+    None.
+
+Example:
+    <code>
+    SYS_Initialize ( NULL );
+
+    while ( true )
+    {
+        SYS_Tasks ( );
+    }
+    </code>
+
+Remarks:
+    If the module is interrupt driven, the system will call this routine from
+    an interrupt context.
+*/
+
+void SYS_Tasks ( void );
+
 
 // *****************************************************************************
 // *****************************************************************************

@@ -65,17 +65,17 @@ void TMR3_Initialize(void)
     SIDL = 0
     SYNC = 0
     TGATE = 0
-    TCKPS =0
+    TCKPS =5
     T32   = 0
     TCS = 0
     */
-    T3CONSET = 0x0;
+    T3CONSET = 0x50;
 
     /* Clear counter */
     TMR3 = 0x0;
 
     /*Set period */
-    PR3 = 17999U;
+    PR3 = 9374U;
 
     IEC0SET = _IEC0_T3IE_MASK;
 
@@ -111,7 +111,7 @@ uint16_t TMR3_CounterGet(void)
 
 uint32_t TMR3_FrequencyGet(void)
 {
-    return (60000000);
+    return (1875000);
 }
 
 void __attribute__((used)) TIMER_3_InterruptHandler (void)

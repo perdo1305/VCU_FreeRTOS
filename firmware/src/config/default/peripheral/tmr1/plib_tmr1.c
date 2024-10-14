@@ -64,17 +64,17 @@ void TMR1_Initialize(void)
     TWDIS = 0
     TECS = 1
     TGATE = 0
-    TCKPS = 0
+    TCKPS = 2
     TSYNC = 0
     TCS = 0
     */
-    T1CONSET = 0x100;
+    T1CONSET = 0x120;
 
     /* Clear counter */
     TMR1 = 0x0;
 
     /*Set period */
-    PR1 = 17999;
+    PR1 = 18749;
 
     /* Setup TMR1 Interrupt */
     TMR1_InterruptEnable();  /* Enable interrupt on the way out */
@@ -112,7 +112,7 @@ uint16_t TMR1_CounterGet(void)
 
 uint32_t TMR1_FrequencyGet(void)
 {
-    return (60000000);
+    return (937500);
 }
 
 void __attribute__((used)) TIMER_1_InterruptHandler (void)

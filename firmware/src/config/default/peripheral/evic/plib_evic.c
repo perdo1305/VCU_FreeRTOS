@@ -56,25 +56,18 @@ void EVIC_Initialize( void )
     INTCONSET = _INTCON_MVEC_MASK;
 
     /* Set up priority and subpriority of enabled interrupts */
-    IPC1SET = 0x4U | 0x0U;  /* TIMER_1:  Priority 1 / Subpriority 0 */
     IPC2SET = 0x400U | 0x0U;  /* TIMER_2:  Priority 1 / Subpriority 0 */
     IPC3SET = 0x40000U | 0x0U;  /* TIMER_3:  Priority 1 / Subpriority 0 */
     IPC4SET = 0x4000000U | 0x0U;  /* TIMER_4:  Priority 1 / Subpriority 0 */
     IPC6SET = 0x4U | 0x0U;  /* TIMER_5:  Priority 1 / Subpriority 0 */
-    IPC9SET = 0x40000U | 0x0U;  /* UART1_FAULT:  Priority 1 / Subpriority 0 */
-    IPC9SET = 0x4000000U | 0x0U;  /* UART1_RX:  Priority 1 / Subpriority 0 */
-    IPC10SET = 0x4U | 0x0U;  /* UART1_TX:  Priority 1 / Subpriority 0 */
+    IPC18SET = 0x4U | 0x0U;  /* DMA0:  Priority 1 / Subpriority 0 */
     IPC19SET = 0x4U | 0x0U;  /* TIMER_6:  Priority 1 / Subpriority 0 */
+    IPC26SET = 0x40000U | 0x0U;  /* ADC_DATA0:  Priority 1 / Subpriority 0 */
+    IPC27SET = 0x400U | 0x0U;  /* ADC_DATA3:  Priority 1 / Subpriority 0 */
+    IPC28SET = 0x40000U | 0x0U;  /* ADC_DATA8:  Priority 1 / Subpriority 0 */
+    IPC30SET = 0x400U | 0x0U;  /* ADC_DATA15:  Priority 1 / Subpriority 0 */
 
 
-
-    /* Configure Shadow Register Set */
-    PRISS = 0x76543210;
-
-    while (PRISS != 0x76543210U)
-    {
-        /* Wait for PRISS value to take effect */
-    }
 }
 
 void EVIC_SourceEnable( INT_SOURCE source )

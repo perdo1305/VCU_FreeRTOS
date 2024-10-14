@@ -81,7 +81,7 @@ void UART3_Initialize( void )
     /* Set up UxMODE bits */
     /* STSEL  = 0*/
     /* PDSEL = 0 */
-    /* BRGH = 1 */
+    /* BRGH = 0 */
     /* RXINV = 0 */
     /* ABAUD = 0 */
     /* LPBACK = 0 */
@@ -91,13 +91,13 @@ void UART3_Initialize( void )
     /* CLKSEL = 0 */
     /* SLPEN = 0 */
     /* UEN = 0 */
-    U3MODE = 0x8;
+    U3MODE = 0x0;
 
     /* Enable UART3 Receiver and Transmitter */
     U3STASET = (_U3STA_UTXEN_MASK | _U3STA_URXEN_MASK );
 
     /* BAUD Rate register Setup */
-    U3BRG = 129;
+    U3BRG = 32;
 
     /* Turn ON UART3 */
     U3MODESET = _U3MODE_ON_MASK;
@@ -125,7 +125,7 @@ bool UART3_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
         }
 
         /* Calculate BRG value */
-        uxbrg = (((srcClkFreq >> 2) + (baud >> 1)) / baud);
+        uxbrg = (((srcClkFreq >> 4) + (baud >> 1)) / baud);
 
         /* Check if the baud value can be set with low baud settings */
         if (uxbrg < 1U)

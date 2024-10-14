@@ -52,9 +52,9 @@ void MCPWM_Initialize (void)
 {
     /* PTCON register  */
     /*  SEVTPS  = 0 */
-    /*  PCLKDIV = 0 */
+    /*  PCLKDIV = 7 */
     /*  SEIEN   = false */
-    PTCON = 0x0;
+    PTCON = 0x70;
 
     /* STCON register  */
     /*  SEVTPS  = 0 */
@@ -66,6 +66,63 @@ void MCPWM_Initialize (void)
     STPER = 2000;
     SEVTCMP = 10;
     SSEVTCMP = 10;
+
+    /*********** Channel 12 Configurations **********/
+    /* PWMCON12 register  */
+    /*  MTBS   = 0 */
+    /*  PTDIR  =  0 */
+    /*  ECAM   =  0 */
+    /*  DTCP   =  0 */
+    /*  DTC    =  0 */
+    /*  ITB    = 0 */
+    /*  PWMHIEN =  false */
+    /*  PWMLIEN = false */
+    /*  TRGIEN = false */
+    /*  CLIEN = false */
+    /*  FLTIEN = false */
+    PWMCON12 = 0x0;
+
+    /* IOCON12 register  */
+    /*  SWAP    = 0*/
+    /*  PMOD    = 1*/
+    /*  POLH    = 0*/
+    /*  POLL    = 0*/
+    /*  FLTDAT  = 0b00 */
+    /*  FLTMOD  = 3 */
+    /*  PENH  = 1 */
+    /*  PENL  = 0 */
+    /*  FLTPOL  = 0  */
+    /*  FLTSRC  = 0  */
+    /*  CLDAT  = 0b00 */
+    /*  CLMOD  = 0 */
+    /*  CLPOL  = 0  */
+    /*  CLSRC  = 0  */
+    IOCON12 = 0x38400;
+
+    PDC12 = 500;
+    SDC12 = 500;
+    PHASE12 = 0;
+
+    /* Dead Time */
+    DTR12 = 75;
+    ALTDTR12 = 75;
+
+    /* Trigger Generator */
+    TRGCON12 = 0x0;
+    TRIG12 = 0;
+    STRIG12 = 0;
+
+    /* leading edge blanking */
+    /* LEBCON12 register  */
+    /*  CLLEBEN    = false  */
+    /*  FLTLEBEN   = false */
+    /*  PLF        = 0  */
+    /*  PLR        = 0  */
+    /*  PHF        = 0  */
+    /*  PHR        = 0  */
+    LEBCON12 = 0x0;
+    LEBDLY12 = 10;
+
 
 }
 

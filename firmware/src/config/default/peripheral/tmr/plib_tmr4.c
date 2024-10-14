@@ -65,17 +65,17 @@ void TMR4_Initialize(void)
     SIDL = 0
     SYNC = 0
     TGATE = 0
-    TCKPS =0
-    T32   = 0
+    TCKPS =7
+    T32   = 1
     TCS = 0
     */
-    T4CONSET = 0x0;
+    T4CONSET = 0x78;
 
     /* Clear counter */
     TMR4 = 0x0;
 
     /*Set period */
-    PR4 = 17999U;
+    PR4 = 117186U;
 
     IEC0SET = _IEC0_T4IE_MASK;
 
@@ -93,25 +93,25 @@ void TMR4_Stop (void)
     T4CONCLR = _T4CON_ON_MASK;
 }
 
-void TMR4_PeriodSet(uint16_t period)
+void TMR4_PeriodSet(uint32_t period)
 {
     PR4  = period;
 }
 
-uint16_t TMR4_PeriodGet(void)
+uint32_t TMR4_PeriodGet(void)
 {
-    return (uint16_t)PR4;
+    return PR4;
 }
 
-uint16_t TMR4_CounterGet(void)
+uint32_t TMR4_CounterGet(void)
 {
-    return (uint16_t)(TMR4);
+    return (TMR4);
 }
 
 
 uint32_t TMR4_FrequencyGet(void)
 {
-    return (60000000);
+    return (234375);
 }
 
 void __attribute__((used)) TIMER_4_InterruptHandler (void)

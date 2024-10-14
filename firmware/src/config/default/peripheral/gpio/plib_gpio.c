@@ -61,18 +61,62 @@ void GPIO_Initialize ( void )
 {
 
     /* PORTA Initialization */
+    LATA = 0x0U; /* Initial Latch Value */
+    TRISACLR = 0x400U; /* Direction Control */
+    ANSELACLR = 0x112U; /* Digital Mode Enable */
     /* PORTB Initialization */
+    LATB = 0x0U; /* Initial Latch Value */
+    TRISBCLR = 0x3c00U; /* Direction Control */
+    ANSELBCLR = 0x81U; /* Digital Mode Enable */
+    CNPUBSET = 0x180U; /* Pull-Up Enable */
+    CNPDBSET = 0x40U; /* Pull-Down Enable */
+    SRCON1BSET = 0x100U; /* Slew Rate Control */
     /* PORTC Initialization */
+    LATC = 0x0U; /* Initial Latch Value */
+    TRISCCLR = 0x800U; /* Direction Control */
+    ANSELCCLR = 0xc03U; /* Digital Mode Enable */
+    CNPUCSET = 0x2400U; /* Pull-Up Enable */
+    SRCON1CSET = 0x2000U; /* Slew Rate Control */
     /* PORTD Initialization */
+    CNPUDSET = 0x120U; /* Pull-Up Enable */
+    CNPDDSET = 0x40U; /* Pull-Down Enable */
     /* PORTE Initialization */
+    ANSELECLR = 0x7000U; /* Digital Mode Enable */
     /* PORTF Initialization */
+    LATF = 0x1U; /* Initial Latch Value */
+    TRISFCLR = 0x3U; /* Direction Control */
     /* PORTG Initialization */
+    LATG = 0x0U; /* Initial Latch Value */
+    TRISGCLR = 0x200U; /* Direction Control */
+    ANSELGCLR = 0x3c0U; /* Digital Mode Enable */
 
+    /* Unlock system for PPS configuration */
+    SYSKEY = 0x00000000U;
+    SYSKEY = 0xAA996655U;
+    SYSKEY = 0x556699AAU;
+
+    CFGCONbits.IOLOCK = 0U;
 
     /* PPS Input Remapping */
+    C1RXR = 7;
+    U1RXR = 6;
+    C2RXR = 10;
+    C3RXR = 10;
+    U3RXR = 2;
+    C4RXR = 2;
 
     /* PPS Output Remapping */
+    RPB15R = 12;
+    RPC0R = 1;
+    RPB14R = 12;
+    RPG8R = 12;
+    RPA4R = 1;
+    RPA1R = 12;
 
+        /* Lock back the system after PPS configuration */
+    CFGCONbits.IOLOCK = 1U;
+
+    SYSKEY = 0x00000000U;
 
 }
 

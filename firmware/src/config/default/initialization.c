@@ -43,6 +43,7 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+#include "configuration.h"
 #include "definitions.h"
 #include "device.h"
 
@@ -73,10 +74,10 @@
 #pragma config DMTINTV =    WIN_127_128
 #pragma config FSOSCEN =    OFF
 #pragma config IESO =       ON
-#pragma config POSCMOD =    OFF
+#pragma config POSCMOD =    HS
 #pragma config OSCIOFNC =   OFF
 #pragma config FCKSM =      CSECME
-#pragma config WDTPS =      PS1048576
+#pragma config WDTPS =      PS2048
 #pragma config WDTSPGM =    STOP
 #pragma config FWDTEN =     OFF
 #pragma config WINDIS =     NORMAL
@@ -87,7 +88,7 @@
 /*** DEVCFG2 ***/
 #pragma config FPLLIDIV =   DIV_1
 #pragma config FPLLRNG =    RANGE_5_10_MHZ
-#pragma config FPLLICLK =   PLL_FRC
+#pragma config FPLLICLK =   PLL_POSC
 #pragma config FPLLMULT =   MUL_60
 #pragma config FPLLODIV =   DIV_4
 #pragma config BORSEL =     HIGH
@@ -151,27 +152,6 @@
 // *****************************************************************************
 // *****************************************************************************
 
-/*******************************************************************************
-  Function:
-    void STDIO_BufferModeSet ( void )
-
-  Summary:
-    Sets the buffering mode for stdin and stdout
-
-  Remarks:
- ********************************************************************************/
-static void STDIO_BufferModeSet(void)
-{
-    /* MISRAC 2012 deviation block start */
-    /* MISRA C-2012 Rule 21.6 deviated 2 times in this file.  Deviation record ID -  H3_MISRAC_2012_R_21_6_DR_3 */
-
-    /* Make stdin unbuffered */
-    setbuf(stdin, NULL);
-
-    /* Make stdout unbuffered */
-    setbuf(stdout, NULL);
-}
-
 
 /* MISRAC 2012 deviation block end */
 
@@ -193,8 +173,6 @@ void SYS_Initialize ( void* data )
 
     /* Start out with interrupts disabled before configuring any modules */
     (void)__builtin_disable_interrupts();
-
-    STDIO_BufferModeSet();
 
 
   
@@ -219,16 +197,18 @@ void SYS_Initialize ( void* data )
 
     CAN2_Initialize();
 
-    TMR6_Initialize();
+    DMAC_Initialize();
 
 	UART3_Initialize();
 
     CORETIMER_Initialize();
+    TMR6_Initialize();
+
     ADCHS_Initialize();
 
-	UART1_Initialize();
-
     TMR4_Initialize();
+
+	UART1_Initialize();
 
     TMR5_Initialize();
 
@@ -251,6 +231,9 @@ void SYS_Initialize ( void* data )
 
 
     /* MISRAC 2012 deviation block end */
+    TASK1_Initialize();
+
+
     EVIC_Initialize();
 
 	/* Enable global interrupts */

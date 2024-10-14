@@ -2,7 +2,7 @@
 
 manifest_file_version: 1.0.0
 project: VCU_FreeRTOS
-creation_date: 2024-10-14T12:01:19.498+01:00[Europe/London]
+creation_date: 2024-10-14T12:15:03.870+01:00[Europe/London]
 operating_system: Windows 10
 mcc_mode: IDE
 mcc_mode_version: v6.15
@@ -19,3 +19,5 @@ device_library: {library_class: com.microchip.mcc.harmony.Harmony3Library, name:
 packs: {name: PIC32MK-MC_DFP, version: 1.11.151}
 modules:
 - {name: csp, type: HARMONY, version: v3.19.3}
+- {name: core, type: HARMONY, version: v3.13.5}
+- {name: CMSIS-FreeRTOS, type: HARMONY, version: v10.5.1}
